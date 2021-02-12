@@ -1,4 +1,4 @@
-{ config, lib, callPackage, vscode-utils, nodePackages,llvmPackages_8, llvmPackages_latest }:
+{ config, lib, callPackage, vscode-utils, nodePackages,llvmPackages_8 }:
 
 let
   inherit (vscode-utils) buildVscodeMarketplaceExtension;
@@ -125,6 +125,18 @@ let
         };
         meta = with lib; {
           license = licenses.mit;
+        };
+      };
+
+      dbaeumer.vscode-eslint = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "vscode-eslint";
+          publisher = "dbaeumer";
+          version = "2.1.14";
+          sha256 = "sha256-bVGmp871yu1Llr3uJ+CCosDsrxJtD4b1+CR+omMUfIQ=";
+        };
+        meta = {
+          license = lib.licenses.mit;
         };
       };
 
@@ -689,9 +701,7 @@ let
         };
       };
 
-      vadimcn.vscode-lldb = callPackage ./vscode-lldb {
-        lldb = llvmPackages_latest.lldb;
-      };
+      vadimcn.vscode-lldb = callPackage ./vscode-lldb { };
 
       vincaslt.highlight-matching-tag = buildVscodeMarketplaceExtension {
         mktplcRef = {
